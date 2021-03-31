@@ -1,0 +1,6 @@
+[Unit]
+Description=Path unit for monitoring pdf2rm path
+[Path]
+PathExistsGlob=/home/root/pdf2remarkable/*.[pP][dD][fF]
+[Install]
+WantedBy=multi-user.target

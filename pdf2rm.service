@@ -1,0 +1,7 @@
+[Unit]
+Description=pdf2rm service
+
+[Service]
+Type=oneshot
+TimeoutStartSec=10
+ExecStart=/home/root/.local/share/pdf2rm/pdf2rm.sh
