@@ -6,8 +6,8 @@ SOURCE_DIR=/home/root/pdf2remarkable
 XOCHITL_DIR=/home/root/.local/share/remarkable/xochitl
 
 function import_pdf() {
-    local pdf="$1"
-    echo "Importing $1 into xochitl"
+    local pdf="$@"
+    echo "Importing $pdf into xochitl"
     # needs full path when called by systemd
     uuid=$(/opt/bin/uuidgen)
     target_pdf="${XOCHITL_DIR}/${uuid}.pdf"
@@ -29,15 +29,17 @@ function import_pdf() {
     "synced": false,
     "type": "DocumentType",
     "version": 0,
-    "visibleName": $(basename "$pdf")
+    "visibleName": "$(basename "$pdf")"
 }
 EOF
+    echo "$(cat "$target_meta")"
     echo "Writing content to $target_content"
     cat << EOF > "$target_content"
 {
     "fileType": "pdf"
 }
 EOF
+    echo "$(cat "$target_content")"
 }
 
 for f in "$SOURCE_DIR"/*.[pP][dD][fF]
@@ -48,5 +50,6 @@ do
 done
 
 echo "Restart xochitl to imported PDFs"
+
 
 
